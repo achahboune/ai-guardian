@@ -2,6 +2,10 @@ const User = require('../models/userModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+exports.getUser = (req, res) => {
+  res.json({ message: "User data fetched successfully" });
+};
+
 exports.register = async (req, res) => {
   const { name, email, password } = req.body;
   const hashed = await bcrypt.hash(password, 10);
@@ -21,3 +25,5 @@ exports.login = async (req, res) => {
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
   res.json({ token });
 };
+
+
